@@ -333,6 +333,21 @@ p { margin: 0 0 1rem; }
   pointer-events: none;
 }
 
+/* thin glowing divider where the hero meets the page — faded at both ends so
+   it reads as a light source rather than a ruled border */
+.hero__edge {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  z-index: 1;
+  height: 2px;
+  background: linear-gradient(90deg,
+    transparent 0%, rgba(255, 34, 51, .5) 15%,
+    var(--red-hot) 50%,
+    rgba(255, 34, 51, .5) 85%, transparent 100%);
+  box-shadow: 0 0 14px 1px rgba(255, 34, 51, .55),
+              0 0 38px 5px rgba(255, 34, 51, .25);
+}
+
 .hero__welcome {
   font-size: clamp(.72rem, 1.6vw, .95rem);
   font-weight: 600;
