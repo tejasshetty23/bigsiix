@@ -213,9 +213,40 @@
   /* ---------------------------------------------------------- leaderboard */
   const money = (n) => "$" + Number(n).toLocaleString("en-US");
 
-  function renderLeaderboard() {
-    if (typeof LEADERBOARD === "undefined") return;
-    const lb = LEADERBOARD;
+  function timeAgo(date) {
+    const mins = Math.round((Date.now() - date.getTime()) / 60000);
+    if (mins < 2)    return "just now";
+    if (mins < 60)   return `${mins} minutes ago`;
+    const hrs = Math.round(mins / 60);
+    if (hrs < 24)    return hrs === 1 ? "1 hour ago" : `${hrs} hours ago`;
+    const days = Math.round(hrs / 24);
+    return days === 1 ? "1 day ago" : `${days} days ago`;
+  }
+
+  /* Fetched rather than inlined so a scheduled job can rewrite the JSON from
+     the affiliate API without touching code. An API key must never reach the
+     browser, so the fetch is always of a static file the job has written. */
+  async function loadLeaderboard() {
+    if (!$("#lbRows")) return;              // not on the leaderboard page
+
+    try {
+      const res = await fetch("data/leaderboard.json", { cache: "no-store" });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      renderLeaderboard(await res.json());
+    } catch (err) {
+      const rows = $("#lbRows");
+      if (rows) {
+        rows.innerHTML =
+          `<tr><td colspan="4" class="lb__error">
+             Couldn't load the leaderboard right now. Try again shortly.
+           </td></tr>`;
+      }
+      console.error("leaderboard load failed:", err);
+    }
+  }
+
+  function renderLeaderboard(lb) {
+    if (!lb) return;
 
     const sub = $("#lbSub");
     if (sub) {
@@ -230,6 +261,15 @@
     if (period) period.textContent = lb.period;
     if (pool)   pool.textContent   = lb.prizePool;
     if (note)   note.textContent   = lb.note;
+
+    const updated = $("#lbUpdated");
+    if (updated && lb.updatedAt) {
+      const t = new Date(lb.updatedAt);
+      if (!Number.isNaN(t.getTime())) {
+        updated.textContent = "Updated " + timeAgo(t);
+        updated.title = t.toLocaleString();
+      }
+    }
 
     const players = [...lb.players].sort((a, b) => b.wagered - a.wagered);
 
@@ -406,7 +446,7 @@
     renderIntro();
     renderSocials();
     renderPartners();
-    renderLeaderboard();
+    loadLeaderboard();
     initReveal();
     initNav();
   }

@@ -1,0 +1,29 @@
+{
+  "_comment": "Leaderboard data. Edit by hand for now; later a scheduled job can overwrite this whole file from the Stake affiliate API. Keep players sorted highest wager first — prizes are matched by position.",
+
+  "casino": "Stake",
+  "casinoUrl": "https://stake.com/?c=SIIX",
+  "code": "SIIX",
+
+  "prizePool": "$2,000",
+  "period": "Monthly",
+  "currency": "USD",
+
+  "endsAt": "2026-08-01T00:00:00Z",
+  "updatedAt": "2026-07-22T00:00:00Z",
+
+  "note": "Wagers only count while you're signed up under code SIIX. Board updates every 24 hours. Prizes are paid within 48 hours of reset.",
+
+  "players": [
+    { "user": "Pl***ne", "wagered": 184320, "prize": "$900" },
+    { "user": "Sl***in", "wagered": 142870, "prize": "$500" },
+    { "user": "xR***er", "wagered": 121450, "prize": "$300" },
+    { "user": "De***ly", "wagered": 98120,  "prize": "$200" },
+    { "user": "Bo***HQ", "wagered": 76540,  "prize": "$100" },
+    { "user": "Ma***ke", "wagered": 61200,  "prize": "$0" },
+    { "user": "Ti***of", "wagered": 44890,  "prize": "$0" },
+    { "user": "Ca***ng", "wagered": 32770,  "prize": "$0" },
+    { "user": "Lu***op", "wagered": 21340,  "prize": "$0" },
+    { "user": "Sp***ei", "wagered": 15880,  "prize": "$0" }
+  ]
+}

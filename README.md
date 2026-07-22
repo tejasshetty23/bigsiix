@@ -13,20 +13,38 @@ No build step, no dependencies. Plain HTML, CSS and JavaScript.
 
 ## Editing content
 
-**Everything on both pages is generated from `js/data.js`.** That's the only
-file you need to touch for normal updates:
+Two files, split by how often they change.
+
+### `js/data.js` — the stuff that rarely changes
 
 - `SITE` — site name
 - `SOCIALS` — Kick, Discord, X, YouTube, Instagram, Twitch. Set a `url` to `""`
   to hide that platform.
 - `PARTNERS` — casino name, referral code, affiliate link, offer text, logo
-- `LEADERBOARD` — prize pool, reset date, and the player rows
 
-Prizes are matched **by position**, so keep `players` sorted highest wager
-first and the payouts line up.
+### `data/leaderboard.json` — the stuff that changes constantly
 
-The countdown reads `LEADERBOARD.endsAt`, an ISO date in UTC —
-`"2026-08-01T00:00:00Z"`.
+Prize pool, reset date, rules note, and the player rows. The page fetches this
+on load.
+
+It's a separate JSON file **so a scheduled job can overwrite it from the Stake
+affiliate API** without touching any code. Until that exists, edit it by hand.
+
+Two rules:
+
+- Prizes are matched **by position** — keep `players` sorted highest wager
+  first and the payouts line up.
+- `endsAt` and `updatedAt` are ISO dates in UTC — `"2026-08-01T00:00:00Z"`.
+  The countdown reads `endsAt`; the "Updated N hours ago" line reads
+  `updatedAt`.
+
+Usernames are shown exactly as written, so mask them in the JSON
+(`Pl***ne`) if they shouldn't be public.
+
+> **If you automate this:** an API key must never appear in the browser —
+> anything the page can read, so can a visitor. Have a scheduled job (e.g. a
+> GitHub Action with the key in Secrets) call the API and commit the resulting
+> JSON. The page only ever fetches the static file.
 
 ## Running locally
 
