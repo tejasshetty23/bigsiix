@@ -237,10 +237,34 @@ p { margin: 0 0 1rem; }
 /* fills the screen below the 74px nav, content centred in whatever is left —
    dvh so mobile browser chrome appearing/disappearing doesn't jump the layout */
 .hero {
+  position: relative;
+  isolation: isolate;         /* keeps the z-index:-1 layers inside the hero */
   display: flex;
   align-items: center;
   min-height: calc(100dvh - 74px);
   padding: clamp(2rem, 6vw, 3.5rem) 0 clamp(3rem, 8vw, 5rem);
+}
+
+/* artwork — offset right so the character stays in frame when a narrow
+   viewport crops the sides */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background: url("../assets/bigsiix-bg.png") 68% 50% / cover no-repeat;
+}
+
+/* scrim: darkens the middle so the wordmark stays legible over the art, and
+   fades the bottom edge into the page so there's no hard seam */
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(70% 60% at 45% 50%, rgba(6, 6, 8, .82), rgba(6, 6, 8, .3) 70%, transparent),
+    linear-gradient(180deg, rgba(6, 6, 8, .6) 0%, rgba(6, 6, 8, .15) 35%, rgba(8, 8, 10, .75) 82%, var(--bg) 100%);
 }
 .hero__inner {
   display: flex;
@@ -1069,6 +1093,15 @@ p { margin: 0 0 1rem; }
   .pod__panel { padding: 1rem .7rem; }
   .pod__user { font-size: 1.3rem; }
   .pod--1 .pod__user { font-size: 1.4rem; }
+
+  /* a portrait viewport crops most of the width away — push further right so
+     the character is framed instead of sliced down the middle */
+  .hero::before { background-position: 88% 50%; }
+  .hero::after {
+    background:
+      radial-gradient(75% 50% at 50% 42%, rgba(6, 6, 8, .88), rgba(6, 6, 8, .45) 72%, transparent),
+      linear-gradient(180deg, rgba(6, 6, 8, .7) 0%, rgba(6, 6, 8, .25) 30%, rgba(8, 8, 10, .8) 85%, var(--bg) 100%);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
