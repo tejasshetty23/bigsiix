@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Leaderboard — BIGSIIX Reloads</title>
+  <meta name="description" content="The BIGSIIX monthly wager leaderboard. Wager under code SIIX to climb the board and win a share of the prize pool." />
+  <meta name="theme-color" content="#0a0a0c" />
+
+  <meta property="og:title" content="Leaderboard — BIGSIIX Reloads" />
+  <meta property="og:description" content="Wager under code SIIX to climb the monthly leaderboard." />
+  <meta property="og:image" content="assets/logo.png" />
+  <meta property="og:type" content="website" />
+
+  <link rel="icon" href="assets/logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <!-- background layers -->
+  <div class="bg-pattern" aria-hidden="true"></div>
+  <div class="bg-glow" aria-hidden="true"></div>
+
+  <!-- ===================== NAV ===================== -->
+  <header class="nav" id="nav">
+    <div class="wrap nav__inner">
+      <a class="brand" href="index.html">
+        <img src="assets/logo.png" alt="" class="brand__logo" />
+        <span class="brand__name">BIG<span class="red">SIIX</span></span>
+      </a>
+
+      <nav class="nav__links" id="navLinks">
+        <a href="index.html">Home</a>
+        <a href="leaderboard.html">Leaderboard</a>
+      </nav>
+
+      <button class="nav__toggle" id="navToggle" aria-label="Menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main id="top">
+
+    <!-- ===================== LEADERBOARD ===================== -->
+    <section class="section section--page" id="leaderboard">
+      <div class="wrap">
+        <div class="section__head reveal">
+          <span class="eyebrow">Compete</span>
+          <h1 class="section__title">Wager <span class="red">Leaderboard</span></h1>
+          <p class="section__sub" id="lbSub"></p>
+        </div>
+
+        <div class="lb__bar reveal">
+          <div class="lb__pool">
+            <span class="lb__poolLabel" id="lbPeriod">Monthly</span>
+            <span class="lb__poolValue" id="lbPool">$0</span>
+            <span class="lb__poolLabel">prize pool</span>
+          </div>
+          <div class="countdown" id="countdown">
+            <div class="cd"><span class="cd__num" data-cd="d">00</span><span class="cd__lbl">Days</span></div>
+            <div class="cd"><span class="cd__num" data-cd="h">00</span><span class="cd__lbl">Hrs</span></div>
+            <div class="cd"><span class="cd__num" data-cd="m">00</span><span class="cd__lbl">Min</span></div>
+            <div class="cd"><span class="cd__num" data-cd="s">00</span><span class="cd__lbl">Sec</span></div>
+          </div>
+        </div>
+
+        <div class="podium" id="podium"></div>
+
+        <div class="table__wrap reveal">
+          <table class="table">
+            <thead>
+              <tr><th>#</th><th>Player</th><th class="ta-r">Wagered</th><th class="ta-r">Prize</th></tr>
+            </thead>
+            <tbody id="lbRows"></tbody>
+          </table>
+        </div>
+
+        <p class="fineprint reveal" id="lbNote"></p>
+
+        <div class="lb__foot reveal">
+          <p>Not signed up yet? Grab the code and start climbing.</p>
+          <a href="index.html#codes" class="btn btn--sm btn--primary">Get the bonus code</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="footer">
+    <div class="wrap footer__inner">
+      <div class="footer__brand">
+        <img src="assets/logo.png" alt="" />
+        <div>
+          <div class="brand__name">BIG<span class="red">SIIX</span></div>
+          <p class="footer__tag">Bonus codes, reloads &amp; rewards.</p>
+        </div>
+      </div>
+
+      <nav class="footer__nav">
+        <a href="index.html">Home</a>
+        <a href="leaderboard.html">Leaderboard</a>
+      </nav>
+
+      <div class="footer__socials" id="footerSocials"></div>
+    </div>
+
+    <div class="wrap footer__legal">
+      <p class="age">18+</p>
+      <p>
+        Gambling involves risk — never wager more than you can afford to lose. This site contains
+        affiliate links and is not operated by any casino. If gambling stops being fun, get support
+        at <a href="https://www.begambleaware.org" target="_blank" rel="noopener">BeGambleAware.org</a>
+        or <a href="https://www.gamblingtherapy.org" target="_blank" rel="noopener">Gambling Therapy</a>.
+      </p>
+      <p class="copyright">&copy; <span id="year"></span> BIGSIIX. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="js/data.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

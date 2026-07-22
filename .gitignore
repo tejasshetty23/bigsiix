@@ -1,0 +1,12 @@
+# OS / editor junk
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+.DS_Store
+*.swp
+.vscode/
+.idea/
+
+# node (only if you ever add tooling — the site itself needs no build)
+node_modules/
+npm-debug.log*

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BIGSIIX — Bonus Codes, Reloads &amp; Leaderboard</title>
+  <meta name="description" content="Official BIGSIIX rewards hub. Claim casino bonus codes, weekly reloads, rakeback and climb the monthly wager leaderboard." />
+  <meta name="theme-color" content="#0a0a0c" />
+
+  <meta property="og:title" content="BIGSIIX Reloads — Bonus Code &amp; Leaderboard" />
+  <meta property="og:description" content="Bonus code, weekly reloads and a monthly wager leaderboard." />
+  <meta property="og:image" content="assets/logo.png" />
+  <meta property="og:type" content="website" />
+
+  <link rel="icon" href="assets/logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <!-- background layers -->
+  <div class="bg-pattern" aria-hidden="true"></div>
+  <div class="bg-glow" aria-hidden="true"></div>
+
+  <!-- ===================== NAV ===================== -->
+  <header class="nav" id="nav">
+    <div class="wrap nav__inner">
+      <a class="brand" href="index.html">
+        <img src="assets/logo.png" alt="" class="brand__logo" />
+        <span class="brand__name">BIG<span class="red">SIIX</span></span>
+      </a>
+
+      <nav class="nav__links" id="navLinks">
+        <a href="index.html">Home</a>
+        <a href="leaderboard.html">Leaderboard</a>
+      </nav>
+
+      <button class="nav__toggle" id="navToggle" aria-label="Menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main id="top">
+
+    <!-- ===================== HERO ===================== -->
+    <section class="hero">
+      <div class="wrap hero__inner">
+        <div class="hero__badge"><span class="dot"></span> Live daily on Kick</div>
+
+        <h1 class="hero__title">
+          <span class="hero__welcome">Welcome to</span>
+          <span class="hero__name">BIGSIIX</span>
+          <span class="hero__sub">Reloads</span>
+        </h1>
+
+        <div class="hero__cta">
+          <a href="#codes" class="btn btn--sm btn--primary" id="watchLive">
+            <span class="dot dot--onRed"></span>Watch live
+          </a>
+          <a href="leaderboard.html" class="btn btn--sm btn--ghost">View leaderboard</a>
+        </div>
+
+        <div class="stats">
+          <div class="stat"><div class="stat__num" data-count="2000" data-prefix="$">$0</div><div class="stat__label">Monthly leaderboard</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== BONUS CODES ===================== -->
+    <section class="section" id="codes">
+      <div class="wrap">
+        <div class="section__head reveal">
+          <span class="eyebrow">Partner</span>
+          <h2 class="section__title">Bonus <span class="red">Code</span></h2>
+        </div>
+
+        <div class="cards" id="partnerGrid"></div>
+
+        <p class="fineprint reveal">
+          These are affiliate links. Using them costs you nothing extra and gets you a better
+          starting bonus than signing up directly.
+        </p>
+      </div>
+    </section>
+
+    <!-- ===================== SOCIALS ===================== -->
+    <section class="section section--alt" id="socials">
+      <div class="wrap">
+        <div class="section__head reveal">
+          <span class="eyebrow">Stay close</span>
+          <h2 class="section__title">Follow the <span class="red">chaos</span></h2>
+          <p class="section__sub">Reloads and giveaways get announced in Discord first.</p>
+        </div>
+        <div class="socialGrid" id="socialGrid"></div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="footer">
+    <div class="wrap footer__inner">
+      <div class="footer__brand">
+        <img src="assets/logo.png" alt="" />
+        <div>
+          <div class="brand__name">BIG<span class="red">SIIX</span></div>
+          <p class="footer__tag">Bonus codes, reloads &amp; rewards.</p>
+        </div>
+      </div>
+
+      <nav class="footer__nav">
+        <a href="index.html">Home</a>
+        <a href="leaderboard.html">Leaderboard</a>
+      </nav>
+
+      <div class="footer__socials" id="footerSocials"></div>
+    </div>
+
+    <div class="wrap footer__legal">
+      <p class="age">18+</p>
+      <p>
+        Gambling involves risk — never wager more than you can afford to lose. This site contains
+        affiliate links and is not operated by any casino. If gambling stops being fun, get support
+        at <a href="https://www.begambleaware.org" target="_blank" rel="noopener">BeGambleAware.org</a>
+        or <a href="https://www.gamblingtherapy.org" target="_blank" rel="noopener">Gambling Therapy</a>.
+      </p>
+      <p class="copyright">&copy; <span id="year"></span> BIGSIIX. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="js/data.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
