@@ -357,31 +357,12 @@
     const timer = setInterval(tick, 1000);
   }
 
-  /* ----------------------------------------------------------- stat count */
-  function countUp(el) {
-    const target = Number(el.dataset.count);
-    const prefix = el.dataset.prefix || "";
-    const suffix = el.dataset.suffix || "";
-    const dur = 1400;
-    const start = performance.now();
-
-    function frame(now) {
-      const t = Math.min((now - start) / dur, 1);
-      const eased = 1 - Math.pow(1 - t, 3);
-      const val = Math.round(target * eased);
-      el.textContent = prefix + val.toLocaleString("en-US") + (suffix === "days" ? "" : suffix);
-      if (t < 1) requestAnimationFrame(frame);
-    }
-    requestAnimationFrame(frame);
-  }
-
   /* --------------------------------------------------------------- reveal */
   function initReveal() {
     const items = $$(".reveal");
 
     if (!("IntersectionObserver" in window)) {
       items.forEach((el) => el.classList.add("is-in"));
-      $$("[data-count]").forEach(countUp);
       return;
     }
 
@@ -396,18 +377,6 @@
       { threshold: 0.12, rootMargin: "0px 0px -60px 0px" }
     );
     items.forEach((el) => io.observe(el));
-
-    const statIo = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((e) => {
-          if (!e.isIntersecting) return;
-          countUp(e.target);
-          statIo.unobserve(e.target);
-        });
-      },
-      { threshold: 0.5 }
-    );
-    $$("[data-count]").forEach((el) => statIo.observe(el));
   }
 
   /* ------------------------------------------------------------------ nav */

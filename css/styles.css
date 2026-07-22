@@ -74,7 +74,6 @@ p { margin: 0 0 1rem; }
 
 .hero__title .red,
 .section__title .red,
-.stat__num,
 .lb__poolValue {
   background: var(--grad-lg);
   -webkit-background-clip: text;
@@ -235,8 +234,22 @@ p { margin: 0 0 1rem; }
 
 /* ============================ HERO ============================ */
 
-.hero { padding: clamp(1.1rem, 3.2vw, 2.25rem) 0 clamp(3rem, 7vw, 5.5rem); }
-.hero__inner { display: flex; flex-direction: column; align-items: center; text-align: center; }
+/* fills the screen below the 74px nav, content centred in whatever is left —
+   dvh so mobile browser chrome appearing/disappearing doesn't jump the layout */
+.hero {
+  display: flex;
+  align-items: center;
+  min-height: calc(100dvh - 74px);
+  padding: clamp(2rem, 6vw, 3.5rem) 0 clamp(3rem, 8vw, 5rem);
+}
+.hero__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+}
 
 .hero__badge {
   display: inline-flex;
@@ -330,40 +343,6 @@ p { margin: 0 0 1rem; }
 }
 
 .hero__cta { display: flex; flex-wrap: wrap; gap: .9rem; justify-content: center; margin-top: 2.4rem; }
-
-/* ---- stats ---- */
-.stats {
-  display: grid;
-  gap: 1px;
-  width: 100%;
-  max-width: 300px;
-  margin-top: 3.4rem;
-  /* red frame: gradient underneath, inner tile inset by the padding */
-  padding: 2px;
-  background: linear-gradient(150deg, var(--red-hot) 0%, var(--red) 45%, var(--red-deep) 100%);
-  border-radius: var(--radius);
-  overflow: hidden;
-  box-shadow: 0 0 30px -10px var(--red-glow);
-}
-.stat {
-  padding: 1.4rem 1rem;
-  border-radius: calc(var(--radius) - 3px);
-  background: radial-gradient(120% 90% at 50% 0%, rgba(255, 34, 51, .12), transparent 65%), #0b0b0f;
-}
-.stat__num {
-  font-family: var(--display);
-  font-weight: 900;
-  font-size: clamp(1.5rem, 4vw, 2.1rem);
-  color: var(--red);
-  line-height: 1;
-}
-.stat__label {
-  margin-top: .4rem;
-  font-size: .78rem;
-  letter-spacing: .06em;
-  text-transform: uppercase;
-  color: var(--dim);
-}
 
 /* ============================ SECTIONS ============================ */
 
@@ -1036,10 +1015,14 @@ p { margin: 0 0 1rem; }
     background: rgba(8, 8, 10, .98);
     backdrop-filter: blur(16px);
     border-bottom: 1px solid var(--line);
-    transform: translateY(-120%);
-    transition: transform .38s var(--ease);
+    /* it starts at top:74px, so shifting by its own height still leaves it
+       covering the bar. Clear the nav's height as well, or the panel's opaque
+       background sits over the logo. */
+    transform: translateY(calc(-100% - 74px));
+    visibility: hidden;
+    transition: transform .38s var(--ease), visibility .38s;
   }
-  .nav__links.is-open { transform: none; }
+  .nav__links.is-open { transform: none; visibility: visible; }
   .nav__links > a:not(.btn) { padding: .9rem 0; border-bottom: 1px solid var(--line); }
   .nav__links > a:not(.btn)::after { display: none; }
   .nav__links .btn { margin-top: 1rem; }
