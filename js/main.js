@@ -320,6 +320,10 @@
     }
 
     startCountdown(lb.endsAt);
+
+    /* these nodes were created after initReveal ran, so hand them over now
+       or they stay stuck at opacity 0 */
+    registerReveals();
   }
 
   /* ------------------------------------------------------------ countdown */
@@ -358,25 +362,34 @@
   }
 
   /* --------------------------------------------------------------- reveal */
-  function initReveal() {
-    const items = $$(".reveal");
+  let revealIO = null;
 
-    if (!("IntersectionObserver" in window)) {
+  /* Safe to call again after injecting markup — re-observing an element the
+     observer already tracks is a no-op. The leaderboard renders after a fetch,
+     so its cards don't exist when this first runs. */
+  function registerReveals() {
+    const items = $$(".reveal:not(.is-in)");
+    if (!revealIO) {
       items.forEach((el) => el.classList.add("is-in"));
       return;
     }
+    items.forEach((el) => revealIO.observe(el));
+  }
 
-    const io = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((e) => {
-          if (!e.isIntersecting) return;
-          e.target.classList.add("is-in");
-          io.unobserve(e.target);
-        });
-      },
-      { threshold: 0.12, rootMargin: "0px 0px -60px 0px" }
-    );
-    items.forEach((el) => io.observe(el));
+  function initReveal() {
+    if ("IntersectionObserver" in window) {
+      revealIO = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (!e.isIntersecting) return;
+            e.target.classList.add("is-in");
+            revealIO.unobserve(e.target);
+          });
+        },
+        { threshold: 0.12, rootMargin: "0px 0px -60px 0px" }
+      );
+    }
+    registerReveals();
   }
 
   /* ------------------------------------------------------------------ nav */

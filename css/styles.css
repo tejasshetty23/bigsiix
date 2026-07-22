@@ -873,6 +873,9 @@ p { margin: 0 0 1rem; }
   text-align: left;
   border-bottom: 1px solid var(--line);
 }
+/* .ta-r alone loses to `.table th` on specificity, so headers stayed left
+   while their cells were right-aligned */
+.table th.ta-r { text-align: right; }
 .table td {
   padding: .95rem 1.4rem;
   font-size: .95rem;
